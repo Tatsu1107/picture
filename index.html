@@ -67,7 +67,7 @@
 
         // S3に画像をアップロードする関数
         async function uploadToS3(base64, fileName) {
-            const apiUrl = 'YOUR_LAMBDA_API_URL';  // LambdaのAPI URLを設定してください
+            const apiUrl = 'https://6we6915wm5.execute-api.us-east-1.amazonaws.com/default/misaki';  // LambdaのAPI URLを設定してください
             const data = {
                 base64: base64,
                 fileName: fileName
