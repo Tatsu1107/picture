@@ -1,0 +1,61 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      * {
+        font-size: 1.4rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      input[type="file"], button {
+        padding: 0.5rem;
+        font-size: 1.4rem;
+        box-sizing: border-box;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <label for="environment">食事の写真を撮る:</label>
+    <input
+      type="file"
+      id="environment"
+      accept="image/*"
+    >
+    <button onclick="sendImage()">送信</button>
+  
+    <script>
+      async function sendImage() {
+        const fileInput = document.getElementById('environment');
+        const file = fileInput.files[0];
+  
+        if (file) {
+          const formData = new FormData();
+          formData.append('image', file);
+  
+          try {
+            const response = await fetch('https://your-lambda-endpoint.amazonaws.com/default/yourFunctionName', {
+              method: 'POST',
+              body: formData,
+            });
+  
+            if (response.ok) {
+              alert('画像が送信されました！');
+            } else {
+              alert('画像の送信に失敗しました。');
+            }
+          } catch (error) {
+            console.error('エラー:', error);
+            alert('エラーが発生しました。');
+          }
+        } else {
+          alert('ファイルを選択してください。');
+        }
+      }
+    </script>
+  </body>
+  </html>
+  
